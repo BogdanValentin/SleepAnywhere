@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "sleepanywhere",
+	"version": "${1.0}",
+	"name": "SleepAnywhere",
+	"description": "Sleep anywhere without a bed!",
+	"authors": [
+		"BogdanValentin977"
+	],
+	"contact": {
+		"sources": "https://github.com/BogdanValentin/SleepAnywhere",
+		"issues": "https://github.com/BogdanValentin/SleepAnywhere/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/sleepanywhere/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.bogdanvalentin.sleepanywhere.SleepAnywhere"
+		],
+		"client": [
+			"net.bogdanvalentin.sleepanywhere.SleepAnywhereClient"
+		],
+		"fabric-datagen": [
+			"net.bogdanvalentin.sleepanywhere.SleepAnywhereDataGenerator"
+		]
+	},
+	"mixins": [
+		"sleepanywhere.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
