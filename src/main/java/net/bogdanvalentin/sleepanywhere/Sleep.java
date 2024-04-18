@@ -25,6 +25,7 @@ public class Sleep {
     static void scheduleSleep(ServerWorld world) {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             List<ServerPlayerEntity> playerList =  world.getPlayers();
+            playerList.removeIf(ServerPlayerEntity::isSpectator);
             if(!playerList.isEmpty()) {
                 boolean allPlayersSleeping = true;
                 for (ServerPlayerEntity it : playerList) {
