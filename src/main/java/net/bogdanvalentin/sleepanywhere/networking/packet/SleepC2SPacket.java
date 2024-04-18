@@ -12,6 +12,10 @@ import net.minecraft.world.World;
 public class SleepC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
+        if (player.isSpectator()) {
+            player.sendMessage(Text.translatable("You can not sleep while in Spectator Mode"), true);
+            return;
+        }
         // only allow to sleep if in overworld
         if (player.getWorld().getRegistryKey() != World.OVERWORLD) {
             player.sendMessage(Text.translatable("You can only sleep in the Overworld"), true);
