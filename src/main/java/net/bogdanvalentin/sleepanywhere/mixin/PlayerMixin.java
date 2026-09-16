@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 public class PlayerMixin {
-    @Inject(method = "stopSleeping", at = @At("HEAD"))
-    private void sleepanywhere$onStopSleeping(CallbackInfo ci) {
+    @Inject(method = "stopSleepInBed", at = @At("HEAD"))
+    private void sleepanywhere$onWakeUp(boolean forcefulWakeUp, boolean updateLevelList, CallbackInfo ci) {
         if (!((Object) this instanceof ServerPlayer player)) {
             return;
         }
-        if (BedlessSleepers.remove(player.getUUID()) && player.isSleepingLongEnough()) {
+        if (BedlessSleepers.remove(player.getUUID()) && !forcefulWakeUp && player.isSleepingLongEnough()) {
             SleepHandler.applyBedlessEffects(player);
         }
     }
