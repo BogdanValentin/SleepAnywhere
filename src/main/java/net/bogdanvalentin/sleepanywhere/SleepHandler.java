@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.LevelData;
 
 public final class SleepHandler {
     private SleepHandler() {
@@ -24,12 +25,12 @@ public final class SleepHandler {
             return;
         }
 
-        ServerLevel level = player.serverLevel();
+        ServerLevel level = player.level();
         if (level.dimension() != Level.OVERWORLD) {
             deny(player, "overworld_only");
             return;
         }
-        if (level.isDay() && !(SleepAnywhere.config().sleepThroughThunderstorms && level.isThundering())) {
+        if (level.isBrightOutside() && !(SleepAnywhere.config().sleepThroughThunderstorms && level.isThundering())) {
             deny(player, "night_only");
             return;
         }
@@ -39,7 +40,8 @@ public final class SleepHandler {
         player.startSleeping(pos);
 
         if (SleepAnywhere.config().setSpawnPoint) {
-            player.setRespawnPosition(level.dimension(), pos, player.getYRot(), false, true);
+            player.setRespawnPosition(new ServerPlayer.RespawnConfig(
+                    LevelData.RespawnData.of(level.dimension(), pos, player.getYRot(), player.getXRot()), false), true);
         }
 
         level.updateSleepingPlayerList();
@@ -48,12 +50,12 @@ public final class SleepHandler {
     public static void applyBedlessEffects(ServerPlayer player) {
         SleepAnywhereConfig config = SleepAnywhere.config();
         apply(player, MobEffects.HUNGER, config.hungerEffect);
-        apply(player, MobEffects.CONFUSION, config.nauseaEffect);
+        apply(player, MobEffects.NAUSEA, config.nauseaEffect);
         apply(player, MobEffects.BLINDNESS, config.blindnessEffect);
         apply(player, MobEffects.DARKNESS, config.darknessEffect);
-        apply(player, MobEffects.DIG_SLOWDOWN, config.fatigueEffect);
+        apply(player, MobEffects.MINING_FATIGUE, config.fatigueEffect);
         apply(player, MobEffects.WEAKNESS, config.weaknessEffect);
-        apply(player, MobEffects.MOVEMENT_SLOWDOWN, config.slownessEffect);
+        apply(player, MobEffects.SLOWNESS, config.slownessEffect);
     }
 
     private static void apply(ServerPlayer player, Holder<MobEffect> effect, int seconds) {

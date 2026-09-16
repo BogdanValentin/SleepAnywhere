@@ -4,13 +4,13 @@ import net.bogdanvalentin.sleepanywhere.SleepAnywhere;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record SleepPayload() implements CustomPacketPayload {
     public static final SleepPayload INSTANCE = new SleepPayload();
 
     public static final CustomPacketPayload.Type<SleepPayload> TYPE =
-            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(SleepAnywhere.MOD_ID, "sleep"));
+            new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(SleepAnywhere.MOD_ID, "sleep"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SleepPayload> CODEC = StreamCodec.unit(INSTANCE);
 
