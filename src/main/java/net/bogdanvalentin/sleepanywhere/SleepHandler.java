@@ -37,7 +37,10 @@ public final class SleepHandler {
 
         BlockPos pos = player.blockPosition();
         BedlessSleepers.add(player.getUUID());
-        player.startSleeping(pos);
+        if (!player.startSleeping(pos)) {
+            BedlessSleepers.remove(player.getUUID());
+            return;
+        }
 
         if (SleepAnywhere.config().setSpawnPoint) {
             player.setRespawnPosition(new ServerPlayer.RespawnConfig(
