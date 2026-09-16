@@ -1,9 +1,10 @@
 {
 	"required": true,
 	"package": "net.bogdanvalentin.sleepanywhere.mixin",
-	"compatibilityLevel": "JAVA_17",
+	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"isSleepingInBedMixin"
+		"LivingEntityMixin",
+		"PlayerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

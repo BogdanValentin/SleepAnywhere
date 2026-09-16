@@ -1,4 +1,7 @@
 {
   "key.category.sleepanywhere.sleepanywhere": "Sleep Anywhere",
-  "key.category.sleepanywhere.sleep": "Sleep"
+  "key.sleepanywhere.sleep": "Sleep",
+  "message.sleepanywhere.spectator": "You cannot sleep while in Spectator Mode",
+  "message.sleepanywhere.overworld_only": "You can only sleep in the Overworld",
+  "message.sleepanywhere.night_only": "You can only sleep at night"
 }

@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "sleepanywhere",
-	"version": "${1.0}",
+	"version": "${version}",
 	"name": "SleepAnywhere",
 	"description": "Sleep anywhere without a bed!",
 	"authors": [
@@ -16,25 +16,19 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.bogdanvalentin.sleepanywhere.SleepAnywhere"
+			"net.bogdanvalentin.sleepanywhere.SleepAnywhereMod"
 		],
 		"client": [
 			"net.bogdanvalentin.sleepanywhere.SleepAnywhereClient"
-		],
-		"fabric-datagen": [
-			"net.bogdanvalentin.sleepanywhere.SleepAnywhereDataGenerator"
 		]
 	},
 	"mixins": [
 		"sleepanywhere.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.20.4",
-		"java": ">=17",
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
