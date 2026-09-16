@@ -65,6 +65,6 @@ public final class SleepHandler {
     }
 
     private static void deny(Player player, String reason) {
-        player.displayClientMessage(Component.translatable("message." + SleepAnywhere.MOD_ID + "." + reason), true);
+        player.sendOverlayMessage(Component.translatable("message." + SleepAnywhere.MOD_ID + "." + reason));
     }
 }

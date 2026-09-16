@@ -11,7 +11,7 @@ public class SleepAnywhereMod implements ModInitializer {
     public void onInitialize() {
         SleepAnywhere.setConfig(SleepAnywhereConfig.load(FabricLoader.getInstance().getConfigDir()));
 
-        PayloadTypeRegistry.playC2S().register(SleepPayload.TYPE, SleepPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(SleepPayload.TYPE, SleepPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(SleepPayload.TYPE,
                 (payload, context) -> SleepHandler.requestSleep(context.player()));
     }
