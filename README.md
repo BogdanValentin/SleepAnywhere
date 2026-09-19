@@ -21,17 +21,17 @@ The Sleep Anywhere mod is a convenient addition to Minecraft that allows players
 
 ## Configuration
 
-The config file lives at `config/sleepanywhere.json` and is created with defaults the first time the mod runs.
+The config file lives at `config/sleepanywhere.json` and is created with defaults the first time the mod runs. Each debuff takes a duration in seconds and a level, where level 1 is the normal strength you would get from a potion. Setting `seconds` to `0` disables that debuff.
 
-| Option | Default | Meaning |
+| Option | Default | Notes |
 | --- | --- | --- |
-| `hungerEffect` | `5` | Hunger duration in seconds, `0` disables it |
-| `nauseaEffect` | `5` | Nausea duration in seconds, `0` disables it |
-| `blindnessEffect` | `5` | Blindness duration in seconds, `0` disables it |
-| `darknessEffect` | `0` | Darkness duration in seconds, `0` disables it |
-| `fatigueEffect` | `10` | Mining Fatigue duration in seconds, `0` disables it |
-| `weaknessEffect` | `10` | Weakness duration in seconds, `0` disables it |
-| `slownessEffect` | `10` | Slowness duration in seconds, `0` disables it |
+| `hunger` | 120s, level 1 | Drains roughly one food point every 40 seconds at level 1 |
+| `nausea` | 20s, level 1 | Screen warp only |
+| `blindness` | 10s, level 1 | Severe, keep it short |
+| `darkness` | 30s, level 1 | The pulsing Warden darkness |
+| `miningFatigue` | 90s, level 1 | Level 1 is already a 70% cut to block breaking speed |
+| `weakness` | 90s, level 1 | Level 1 is a flat -4 attack damage |
+| `slowness` | 60s, level 1 | -15% movement speed per level |
 | `setSpawnPoint` | `false` | Set your respawn point where you sleep, like a bed would |
 | `sleepThroughThunderstorms` | `true` | Allow sleeping during a thunderstorm, like a bed would |
 
