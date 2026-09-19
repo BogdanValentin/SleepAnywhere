@@ -10,6 +10,17 @@ base {
 	archivesName = project.archives_base_name
 }
 
+loom {
+	runs {
+		client2 {
+			client()
+			configName = "Minecraft Client 2"
+			programArgs "--username", "Tester2"
+			runDir "run/client2"
+		}
+	}
+}
+
 repositories {
 }
 
