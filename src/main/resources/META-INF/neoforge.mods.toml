@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "SleepAnywhere"
 authors = "BogdanValentin977"
 description = '''Sleep anywhere without a bed!'''
-logoFile = "icon.png"
+iconFile = "icon.png"
 
 [[mixins]]
 config = "sleepanywhere.mixins.json"
