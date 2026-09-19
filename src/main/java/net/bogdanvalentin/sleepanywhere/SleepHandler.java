@@ -49,18 +49,18 @@ public final class SleepHandler {
 
     public static void applyBedlessEffects(ServerPlayer player) {
         SleepAnywhereConfig config = SleepAnywhere.config();
-        apply(player, MobEffects.HUNGER, config.hungerEffect);
-        apply(player, MobEffects.NAUSEA, config.nauseaEffect);
-        apply(player, MobEffects.BLINDNESS, config.blindnessEffect);
-        apply(player, MobEffects.DARKNESS, config.darknessEffect);
-        apply(player, MobEffects.MINING_FATIGUE, config.fatigueEffect);
-        apply(player, MobEffects.WEAKNESS, config.weaknessEffect);
-        apply(player, MobEffects.SLOWNESS, config.slownessEffect);
+        apply(player, MobEffects.HUNGER, config.hunger);
+        apply(player, MobEffects.NAUSEA, config.nausea);
+        apply(player, MobEffects.BLINDNESS, config.blindness);
+        apply(player, MobEffects.DARKNESS, config.darkness);
+        apply(player, MobEffects.MINING_FATIGUE, config.miningFatigue);
+        apply(player, MobEffects.WEAKNESS, config.weakness);
+        apply(player, MobEffects.SLOWNESS, config.slowness);
     }
 
-    private static void apply(ServerPlayer player, Holder<MobEffect> effect, int seconds) {
-        if (seconds > 0) {
-            player.addEffect(new MobEffectInstance(effect, seconds * 20, 0));
+    private static void apply(ServerPlayer player, Holder<MobEffect> effect, SleepAnywhereConfig.Effect setting) {
+        if (setting.seconds > 0) {
+            player.addEffect(new MobEffectInstance(effect, setting.seconds * 20, setting.level - 1));
         }
     }
 
