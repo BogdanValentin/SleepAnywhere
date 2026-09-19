@@ -17,6 +17,12 @@ neoForge {
 		client {
 			client()
 		}
+		client2 {
+			client()
+			programArgument '--username'
+			programArgument 'Tester2'
+			gameDirectory = file('run/client2')
+		}
 		server {
 			server()
 		}
