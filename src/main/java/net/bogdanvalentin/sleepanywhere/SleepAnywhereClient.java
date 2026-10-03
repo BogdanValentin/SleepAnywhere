@@ -1,22 +1,17 @@
 package net.bogdanvalentin.sleepanywhere;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.bogdanvalentin.sleepanywhere.network.SleepPayload;
+import net.bogdanvalentin.sleepanywhere.network.SleepNetwork;
+import net.bogdanvalentin.sleepanywhere.network.SleepPacket;
 import net.minecraft.client.KeyMapping;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
-@Mod(value = SleepAnywhere.MOD_ID, dist = Dist.CLIENT)
-public class SleepAnywhereClient {
+public final class SleepAnywhereClient {
     public static final String KEY_CATEGORY = "key.category.sleepanywhere.sleepanywhere";
     public static final String KEY_SLEEP = "key.sleepanywhere.sleep";
 
@@ -27,19 +22,24 @@ public class SleepAnywhereClient {
             KEY_CATEGORY
     );
 
-    public SleepAnywhereClient(IEventBus modBus, ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        modBus.addListener(this::registerKeyMappings);
-        NeoForge.EVENT_BUS.addListener(SleepAnywhereClient::onClientTick);
+    private SleepAnywhereClient() {
     }
 
-    private void registerKeyMappings(RegisterKeyMappingsEvent event) {
-        event.register(SLEEP_KEY);
+    public static void init(IEventBus modBus) {
+        modBus.addListener(SleepAnywhereClient::onClientSetup);
+        MinecraftForge.EVENT_BUS.addListener(SleepAnywhereClient::onClientTick);
     }
 
-    private static void onClientTick(ClientTickEvent.Post event) {
+    private static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> ClientRegistry.registerKeyBinding(SLEEP_KEY));
+    }
+
+    private static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) {
+            return;
+        }
         while (SLEEP_KEY.consumeClick()) {
-            PacketDistributor.sendToServer(SleepPayload.INSTANCE);
+            SleepNetwork.CHANNEL.sendToServer(SleepPacket.INSTANCE);
         }
     }
 }

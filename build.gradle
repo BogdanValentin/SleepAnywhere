@@ -1,5 +1,5 @@
 plugins {
-	id 'net.neoforged.moddev' version "${moddev_version}"
+	id 'net.neoforged.moddev.legacyforge' version "${moddev_version}"
 	id 'maven-publish'
 }
 
@@ -10,12 +10,14 @@ base {
 	archivesName = project.archives_base_name
 }
 
-neoForge {
-	version = project.neoforge_version
+legacyForge {
+	version = "${project.minecraft_version}-${project.forge_version}"
 
 	runs {
 		client {
 			client()
+			programArgument '--username'
+			programArgument 'Dev'
 		}
 		client2 {
 			client()
@@ -25,6 +27,7 @@ neoForge {
 		}
 		server {
 			server()
+			gameDirectory = file('run/server')
 		}
 	}
 
@@ -44,20 +47,20 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	filesMatching("META-INF/neoforge.mods.toml") {
+	filesMatching("META-INF/mods.toml") {
 		expand "version": project.version
 	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
 }
 
 java {
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {

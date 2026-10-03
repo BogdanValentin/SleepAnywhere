@@ -14,17 +14,17 @@ The Sleep Anywhere mod is a convenient addition to Minecraft that allows players
     - Hunger
     - Nausea
     - Blindness
-    - Darkness
     - Mining Fatigue
     - Weakness
     - Slowness
 
 ## Configuration
 
-You can customize the effects of the Sleep Anywhere mod through its configuration file (located in .minecraft/config/sleepanywhere-common.toml), or in game from the Config button on the mod's entry in the mod list:
+You can customize the effects of the Sleep Anywhere mod through its configuration file (located in .minecraft/config/sleepanywhere-common.toml):
 - **Debuffs**: Adjust the duration in seconds and the level of the debuffs applied when sleeping, or disable them entirely if desired (by setting the duration to 0). Level 1 is the normal strength you would get from a potion.
 - **Spawn point**: Set `setSpawnPoint` to true to have sleeping set your respawn point, like a bed would.
 - **Thunderstorms**: Set `sleepThroughThunderstorms` to false to only allow sleeping at night.
+- **Custom debuffs**: Add any effect, including ones from other mods, to `customEffects` as `"effect_id,seconds,level"`, for example `customEffects = ["minecraft:poison,10", "somemod:drowsy,60,2"]`. The level is optional and defaults to 1. Effects from mods that are not installed are skipped.
 
 ## Feedback and Support
 
